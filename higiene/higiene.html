@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Higiene Personal</title>
     
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- CORRECCIÓN: Agregamos ../ para salir de la carpeta higiene y encontrar las carpetas css y js -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <script src="js/bootstrap.bundle.min.js" defer></script>
-    <script src="js/script.js" defer></script>
+    <script src="../js/bootstrap.bundle.min.js" defer></script>
+    <script src="../js/script.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -25,11 +26,12 @@
                     <span class="fw-bold fs-5 text-dark tracking-tight mb-0">Higiene Personal</span>
                 </div>
 
+                <!-- CORRECCIÓN: Cambiamos / por ../ para que las rutas sean relativas -->
                 <div class="d-none d-lg-flex align-items-center gap-4">
-                    <a class="nav-link fw-medium text-secondary hover-text-info transition" href="/gym/gym.html">GYM</a>
-                    <a class="nav-link fw-medium text-secondary hover-text-info transition" href="/salud-mental/salud-mental.html">Salud Mental</a>
-                    <a class="nav-link fw-bold text-info" href="/higiene/higiene.html">Higiene Personal</a>
-                    <a class="nav-link fw-medium text-secondary hover-text-info transition" href="/jarra/jarra.html">El Buen Beber</a>
+                    <a class="nav-link fw-medium text-secondary hover-text-info transition" href="../gym/gym.html">GYM</a>
+                    <a class="nav-link fw-medium text-secondary hover-text-info transition" href="../salud-mental/salud-mental.html">Salud Mental</a>
+                    <a class="nav-link fw-bold text-info" href="../higiene/higiene.html">Higiene Personal</a>
+                    <a class="nav-link fw-medium text-secondary hover-text-info transition" href="../jarra/jarra.html">El Buen Beber</a>
                 </div>
 
                 <div class="d-flex align-items-center gap-3">
@@ -40,10 +42,11 @@
                         <ul class="dropdown-menu dropdown-menu-end shadow border-0" style="min-width: 220px;">
                             <li><span class="dropdown-header fw-bold">Explorar Secciones</span></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item py-2" href="/gym/gym.html"><i class="bi bi-bicycle me-2 text-success"></i> GYM</a></li>
-                            <li><a class="dropdown-item py-2" href="/salud-mental/salud-mental.html"><i class="bi bi-emoji-smile me-2 text-primary"></i> Salud Mental</a></li>
-                            <li><a class="dropdown-item py-2 active bg-cyan-suave" href="/higiene/higiene.html"><i class="bi bi-droplet me-2 text-info"></i> Higiene Personal</a></li>
-                            <li><a class="dropdown-item py-2" href="/jarra/jarra.html"><i class="bi bi-droplet-half me-2 text-primary"></i> El Buen Beber</a></li>  
+                            <!-- CORRECCIÓN: Rutas relativas en el menú de móvil también -->
+                            <li><a class="dropdown-item py-2" href="../gym/gym.html"><i class="bi bi-bicycle me-2 text-success"></i> GYM</a></li>
+                            <li><a class="dropdown-item py-2" href="../salud-mental/salud-mental.html"><i class="bi bi-emoji-smile me-2 text-primary"></i> Salud Mental</a></li>
+                            <li><a class="dropdown-item py-2 active bg-cyan-suave" href="../higiene/higiene.html"><i class="bi bi-droplet me-2 text-info"></i> Higiene Personal</a></li>
+                            <li><a class="dropdown-item py-2" href="../jarra/jarra.html"><i class="bi bi-droplet-half me-2 text-primary"></i> El Buen Beber</a></li>  
                         </ul>
                     </div>
 
@@ -182,7 +185,7 @@
                 </div>
             </div>
         </div>
-    </nav>
+    </section>
 
     <section class="py-5 mb-5 bg-white">
         <div class="container py-4">
