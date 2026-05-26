@@ -2,22 +2,492 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Menú Principal - Boceto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Tu Centro de Salud</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Plus Jakarta Sans para un toque más moderno -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        /* Fondo decorativo */
+        .bg-pattern {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(210, 100%, 95%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(140, 100%, 95%, 1) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(30, 100%, 95%, 1) 0px, transparent 50%);
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        /* Estilos de las porciones del SVG */
+        .plate-group {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: 100px 100px; /* Centro exacto del plato */
+            cursor: pointer;
+        }
+
+        .plate-group:hover, .plate-group.active {
+            transform: scale(1.08);
+            filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.15));
+        }
+
+        .plate-stroke {
+            stroke: #ffffff;
+            stroke-width: 4;
+            stroke-linejoin: round;
+        }
+
+        /* Listas flotantes animadas */
+        .floating-list {
+            opacity: 0;
+            transform: translateY(12px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+        }
+
+        .plate-group:hover .floating-list, 
+        .plate-group.active .floating-list {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animación sutil de flotación para el plato central */
+        .float-subtle {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Sombra premium para las tarjetas */
+        .shadow-premium {
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+        }
+
+        /* Scrollbar personalizada para el modal del evento si la pantalla es pequeña */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col items-center py-12 px-4 md:px-8 relative">
 
-    <h1>Boceto Inicial (Index)</h1>
-    <p>Haz clic en los enlaces para ir a las diferentes secciones:</p>
+    <div class="bg-pattern"></div>
 
-    <ul>
-        <li><a href="seccion1/seccion1.html">Ir al GYM (Sección 1)</a></li>
-        <li><a href="seccion2/seccion2.html">Ir a otra sección (Sección 2)</a></li>
-        <li><a href="seccion3/seccion3.html">Plato del buen comer (Sección 3)</a></li>
-        <li><a href="seccion4/seccion4.html">Otra sección (Sección 4)</a></li>
-        <li><a href="seccion5/seccion5.html">Otra sección (Sección 5)</a></li>
-        <li><a href="seccion6/seccion6.html">Algo de un evento (Sección 6)</a></li>
-        <li><a href="seccion7/seccion7.html">Otra sección (Sección 7)</a></li>
-    </ul>
+    <!-- Header / Título Principal -->
+    <header class="text-center mb-12 md:mb-20 relative z-10">
+        <div class="inline-flex items-center justify-center p-2 bg-white rounded-2xl shadow-sm border border-slate-100 mb-4 text-emerald-500">
+            <i data-lucide="activity" class="w-6 h-6"></i>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight mb-4">Bienvenido a tu Espacio</h1>
+        <p class="text-slate-500 text-lg max-w-xl mx-auto font-medium">Explora nuestras secciones o interactúa con el plato central para descubrir tu balance ideal.</p>
+    </header>
 
+    <!-- Contenedor Principal -->
+    <main class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-center relative">
+
+        <!-- ================= COLUMNA IZQUIERDA ================= -->
+        <div class="flex flex-col gap-6 lg:gap-16 order-2 lg:order-1 h-full justify-center">
+            
+            <!-- Tarjeta: GYM -->
+            <a href="#gym" class="group relative bg-white/80 backdrop-blur-md rounded-[2rem] shadow-premium border border-white p-6 h-40 lg:h-48 flex flex-col items-center justify-center text-slate-600 hover:text-emerald-600 hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-emerald-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="w-16 h-16 bg-emerald-100/50 rounded-2xl flex items-center justify-center mb-4 text-emerald-500 transition-transform group-hover:scale-110 group-hover:rotate-6">
+                    <i data-lucide="dumbbell" class="w-8 h-8"></i>
+                </div>
+                <span class="font-bold text-xl relative z-10">GYM</span>
+            </a>
+
+            <!-- Tarjeta: Bienestar -->
+            <a href="#bienestar" class="group relative bg-white/80 backdrop-blur-md rounded-[2rem] shadow-premium border border-white p-6 h-40 lg:h-48 flex flex-col items-center justify-center text-slate-600 hover:text-indigo-600 hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="w-16 h-16 bg-indigo-100/50 rounded-2xl flex items-center justify-center mb-4 text-indigo-500 transition-transform group-hover:scale-110 group-hover:rotate-6">
+                    <i data-lucide="brain" class="w-8 h-8"></i>
+                </div>
+                <span class="font-bold text-xl relative z-10 text-center">SALUD MENTAL</span>
+            </a>
+
+        </div>
+
+        <!-- ================= COLUMNA CENTRAL (EL PLATO) ================= -->
+        <div class="flex flex-col items-center justify-center gap-12 order-1 lg:order-2 z-20 relative lg:py-10">
+            
+            <!-- PLATO DEL BIEN COMER -->
+            <div class="w-full max-w-[320px] md:max-w-[460px] relative flex justify-center float-subtle">
+                
+                <!-- SVG: Restaurado a un tamaño que aprovecha mejor la pantalla -->
+                <svg id="plato-svg" viewBox="-60 -60 320 320" class="w-full overflow-visible">
+                    <defs>
+                        <clipPath id="clip-verduras"><path d="M 100 100 L 100 0 A 100 100 0 0 1 186.6 150 Z" /></clipPath>
+                        <clipPath id="clip-cereales"><path d="M 100 100 L 186.6 150 A 100 100 0 0 1 13.4 150 Z" /></clipPath>
+                        <clipPath id="clip-leguminosas"><path d="M 100 100 L 13.4 150 A 100 100 0 0 1 100 0 Z" /></clipPath>
+                        
+                        <!-- Sombra para el marco decorativo -->
+                        <filter id="bg-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feDropShadow dx="0" dy="15" stdDeviation="20" flood-opacity="0.1" flood-color="#000000" />
+                        </filter>
+                    </defs>
+
+                    <!-- Fondo Decorativo Integrado en el SVG -->
+                    <circle cx="100" cy="100" r="112" fill="#ffffff" filter="url(#bg-shadow)" />
+                    <circle cx="100" cy="100" r="105" fill="none" stroke="#f8fafc" stroke-width="4" />
+
+                    <!-- PORCIÓN 1: Verduras y Frutas -->
+                    <g class="plate-group" data-section="verduras">
+                        <image href="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=400&q=80" 
+                               x="50" y="0" width="150" height="150" clip-path="url(#clip-verduras)" preserveAspectRatio="xMidYMid slice" opacity="0.95"/>
+                        <path class="plate-stroke" fill="rgba(34, 197, 94, 0.85)" d="M 100 100 L 100 0 A 100 100 0 0 1 186.6 150 Z" />
+                        
+                        <!-- Icono -->
+                        <foreignObject x="133" y="32" width="34" height="34">
+                            <div class="flex items-center justify-center text-white drop-shadow-md">
+                                <i data-lucide="leaf" class="w-7 h-7"></i>
+                            </div>
+                        </foreignObject>
+                        
+                        <!-- Texto -->
+                        <text x="152" y="85" text-anchor="middle" fill="white" font-size="11" font-weight="800" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.4))">Verduras</text>
+                        <text x="152" y="99" text-anchor="middle" fill="white" font-size="11" font-weight="800" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.4))">y Frutas</text>
+                        
+                        <!-- Tooltip Verduras -->
+                        <foreignObject x="195" y="0" width="140" height="150" class="floating-list hidden md:block">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white/95 backdrop-blur-md border border-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl p-4 text-xs leading-tight">
+                                <h4 class="font-bold text-slate-800 mb-2 border-b border-slate-100 pb-2 flex items-center gap-1.5">
+                                    <i data-lucide="leaf" class="w-4 h-4 text-green-500"></i> Verduras
+                                </h4>
+                                <ul class="text-slate-600 space-y-2.5 font-medium">
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-green-500"></i> Brócoli</li>
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-green-500"></i> Manzana</li>
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-green-500"></i> Zanahoria</li>
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-green-500"></i> Plátano</li>
+                                </ul>
+                            </div>
+                        </foreignObject>
+                    </g>
+
+                    <!-- PORCIÓN 2: Cereales -->
+                    <g class="plate-group" data-section="cereales">
+                        <image href="https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80" 
+                               x="0" y="100" width="200" height="100" clip-path="url(#clip-cereales)" preserveAspectRatio="xMidYMid slice" opacity="0.95"/>
+                        <path class="plate-stroke" fill="rgba(245, 158, 11, 0.85)" d="M 100 100 L 186.6 150 A 100 100 0 0 1 13.4 150 Z" />
+                        
+                        <!-- Icono -->
+                        <foreignObject x="83" y="125" width="34" height="34">
+                            <div class="flex items-center justify-center text-white drop-shadow-md">
+                                <i data-lucide="wheat" class="w-7 h-7"></i>
+                            </div>
+                        </foreignObject>
+                        
+                        <!-- Texto -->
+                        <text x="100" y="174" text-anchor="middle" fill="white" font-size="12" font-weight="800" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.4))">Cereales</text>
+
+                        <!-- Tooltip Cereales -->
+                        <foreignObject x="30" y="185" width="140" height="150" class="floating-list hidden md:block">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white/95 backdrop-blur-md border border-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl p-4 text-xs leading-tight">
+                                <h4 class="font-bold text-slate-800 mb-2 border-b border-slate-100 pb-2 flex items-center gap-1.5">
+                                    <i data-lucide="wheat" class="w-4 h-4 text-amber-500"></i> Cereales
+                                </h4>
+                                <ul class="text-slate-600 space-y-2.5 font-medium">
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-amber-500"></i> Maíz</li>
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-amber-500"></i> Trigo</li>
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-amber-500"></i> Papa</li>
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-amber-500"></i> Pan</li>
+                                </ul>
+                            </div>
+                        </foreignObject>
+                    </g>
+
+                    <!-- PORCIÓN 3: Leguminosas -->
+                    <g class="plate-group" data-section="leguminosas">
+                        <image href="https://images.unsplash.com/photo-1604634077374-3ee8c50c0576?auto=format&fit=crop&w=400&q=80" 
+                               x="0" y="0" width="100" height="150" clip-path="url(#clip-leguminosas)" preserveAspectRatio="xMidYMid slice" opacity="0.95"/>
+                        <path class="plate-stroke" fill="rgba(239, 68, 68, 0.85)" d="M 100 100 L 13.4 150 A 100 100 0 0 1 100 0 Z" />
+                        
+                        <!-- Icono -->
+                        <foreignObject x="31" y="32" width="34" height="34">
+                            <div class="flex items-center justify-center text-white drop-shadow-md">
+                                <i data-lucide="drumstick" class="w-7 h-7"></i>
+                            </div>
+                        </foreignObject>
+
+                        <!-- Texto -->
+                        <text x="48" y="85" text-anchor="middle" fill="white" font-size="10" font-weight="800" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.4))">Leguminosas</text>
+                        <text x="48" y="99" text-anchor="middle" fill="white" font-size="10" font-weight="800" filter="drop-shadow(0 2px 4px rgba(0,0,0,0.4))">y Animal</text>
+
+                        <!-- Tooltip Leguminosas -->
+                        <foreignObject x="-135" y="0" width="140" height="160" class="floating-list hidden md:block">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="bg-white/95 backdrop-blur-md border border-white shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl p-4 text-xs leading-tight">
+                                <h4 class="font-bold text-slate-800 mb-2 border-b border-slate-100 pb-2 flex items-center gap-1.5">
+                                    <i data-lucide="drumstick" class="w-4 h-4 text-red-500"></i> Proteínas
+                                </h4>
+                                <ul class="text-slate-600 space-y-2.5 font-medium">
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-red-500"></i> Carne</li>
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-red-500"></i> Huevo</li>
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-red-500"></i> Frijoles</li>
+                                    <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-red-500"></i> Lácteos</li>
+                                </ul>
+                            </div>
+                        </foreignObject>
+                    </g>
+
+                    <!-- Punto Decorativo Central -->
+                    <circle cx="100" cy="100" r="10" fill="white" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.3))"/>
+                    <circle cx="100" cy="100" r="4" fill="#f8fafc"/>
+                </svg>
+            </div>
+
+            <!-- Tarjeta: Algo de un Evento (Con ID para abrir Modal) -->
+            <a href="#" id="btn-evento" class="group w-full max-w-[320px] bg-gradient-to-br from-amber-400 via-orange-500 to-rose-500 rounded-[2rem] shadow-[0_12px_30px_-10px_rgba(249,115,22,0.5)] p-5 flex items-center justify-between text-white hover:shadow-[0_20px_40px_-10px_rgba(249,115,22,0.6)] hover:-translate-y-1 transition-all duration-400 relative overflow-hidden cursor-pointer">
+                <div class="absolute -right-6 -top-6 w-32 h-32 bg-white/20 rounded-full blur-2xl group-hover:bg-white/30 transition-colors"></div>
+                <div class="flex items-center gap-4 relative z-10">
+                    <div class="bg-white/20 p-3.5 rounded-2xl backdrop-blur-md shadow-inner">
+                        <i data-lucide="ticket" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div class="text-left">
+                        <span class="font-bold text-xl block leading-tight mb-1">Evento Especial</span>
+                        <span class="text-sm font-medium text-white/90">Ver imagen del evento</span>
+                    </div>
+                </div>
+                <i data-lucide="chevron-right" class="w-6 h-6 text-white/70 group-hover:text-white group-hover:translate-x-1 transition-all relative z-10"></i>
+            </a>
+
+        </div>
+
+        <!-- ================= COLUMNA DERECHA ================= -->
+        <div class="flex flex-col gap-6 lg:gap-16 order-3 h-full justify-center">
+            
+            <!-- Tarjeta: Otra Sección (Arriba Derecha) -->
+            <a href="#seccion-arriba-der" class="group relative bg-white/80 backdrop-blur-md rounded-[2rem] shadow-premium border border-white p-6 h-40 lg:h-48 flex flex-col items-center justify-center text-slate-600 hover:text-sky-600 hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-sky-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="w-16 h-16 bg-sky-100/50 rounded-2xl flex items-center justify-center mb-4 text-sky-500 transition-transform group-hover:scale-110 group-hover:rotate-6">
+                    <i data-lucide="droplets" class="w-8 h-8"></i>
+                </div>
+                <span class="font-bold text-xl relative z-10 text-center">HIGIENE PERSONAL</span>
+            </a>
+
+            <!-- Tarjeta: Otra Sección (Abajo Derecha) -->
+            <a href="#seccion2" class="group relative bg-white/80 backdrop-blur-md rounded-[2rem] shadow-premium border border-white p-6 h-40 lg:h-48 flex flex-col items-center justify-center text-slate-600 hover:text-rose-600 hover:-translate-y-2 transition-all duration-300 overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-br from-rose-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="w-16 h-16 bg-rose-100/50 rounded-2xl flex items-center justify-center mb-4 text-rose-500 transition-transform group-hover:scale-110 group-hover:rotate-6">
+                    <i data-lucide="glass-water" class="w-8 h-8"></i>
+                </div>
+                <span class="font-bold text-xl relative z-10 text-center">EL BUEN BEBER</span>
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- ================= MODAL DE NUTRICIÓN ================= -->
+    <div id="info-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300">
+        <div id="modal-content" class="bg-white rounded-[2rem] shadow-2xl max-w-md w-full p-8 transform scale-90 translate-y-4 transition-all duration-400 relative border border-slate-100">
+            
+            <button id="close-modal" class="absolute top-5 right-5 text-slate-400 hover:text-slate-800 transition-colors bg-slate-50 rounded-full p-2 hover:bg-slate-100 focus:outline-none">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="flex flex-col items-start gap-4 mb-6">
+                <div id="modal-icon" class="flex items-center justify-center w-16 h-16 rounded-2xl shadow-inner mb-2">
+                    <!-- Icono inyectado por JS -->
+                </div>
+                <div>
+                    <h3 id="modal-title" class="text-3xl font-extrabold text-slate-800 leading-tight tracking-tight">Título</h3>
+                    <span id="modal-badge" class="inline-block px-4 py-1.5 mt-3 text-xs uppercase tracking-wider font-bold text-white rounded-full shadow-sm">
+                        Badge
+                    </span>
+                </div>
+            </div>
+            
+            <p id="modal-desc" class="text-slate-600 leading-relaxed text-base border-t border-slate-100 pt-6 font-medium">
+                Descripción detallada del grupo alimenticio.
+            </p>
+        </div>
+    </div>
+
+    <!-- ================= MODAL DEL EVENTO (CORREGIDO PARA IMAGEN VERTICAL) ================= -->
+    <div id="evento-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+        <div id="evento-modal-content" class="bg-white rounded-[2rem] shadow-2xl max-w-lg w-full overflow-hidden transform scale-90 translate-y-4 transition-all duration-400 relative max-h-[95vh] flex flex-col">
+            
+            <!-- Botón Cerrar Evento -->
+            <button id="close-evento-modal" class="absolute top-4 right-4 z-20 text-slate-700 bg-white/90 backdrop-blur-md rounded-full p-2 hover:bg-white focus:outline-none shadow-md transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Contenedor de la Imagen: Ahora adaptado para pósters/imágenes verticales -->
+            <div class="w-full bg-slate-50 border-b border-slate-100 flex items-center justify-center relative overflow-hidden shrink-0">
+                
+                <!-- AQUÍ VA LA IMAGEN DE TU EVENTO -->
+                <!-- He cambiado aspect-video y object-cover por object-contain y max-h para que no se recorte -->
+                <img src="imagenes/imagen.jpeg" alt="Evento Especial" class="w-full h-auto max-h-[60vh] object-contain hover:scale-[1.02] transition-transform duration-700" />
+                
+            </div>
+            
+            <!-- Contenido / Texto del Evento: Permite scroll interno si la pantalla es muy pequeña -->
+            <div class="p-6 md:p-8 overflow-y-auto">
+                <div class="flex items-center gap-2 mb-3 text-rose-500 font-bold text-sm tracking-wider uppercase">
+                    <i data-lucide="calendar" class="w-4 h-4"></i> Próximamente
+                </div>
+                <h3 class="text-2xl font-extrabold text-slate-800 mb-2 leading-tight">2da Carrera por la Salud</h3>
+                <p class="text-slate-600 font-medium leading-relaxed">
+                    Acompáñanos en nuestra próxima jornada especial.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Inicializar iconos de Lucide
+        lucide.createIcons();
+
+        // ==========================================
+        // LÓGICA PARA EL PLATO Y MODAL DE NUTRICIÓN
+        // ==========================================
+        const nutritionData = {
+            verduras: {
+                title: "Verduras y Frutas",
+                icon: "leaf",
+                iconBg: "bg-green-100 text-green-600",
+                badge: "¡Come en Abundancia!",
+                badgeColor: "bg-green-500",
+                description: "Constituyen la principal fuente de vitaminas, minerales, antioxidantes y fibra dietética. Su consumo frecuente ayuda a mantener un buen funcionamiento del cuerpo, previene enfermedades y permite una buena hidratación gracias a su alto contenido de agua."
+            },
+            cereales: {
+                title: "Cereales y Tubérculos",
+                icon: "wheat",
+                iconBg: "bg-amber-100 text-amber-600",
+                badge: "¡Come lo Suficiente!",
+                badgeColor: "bg-amber-500",
+                description: "Son la fuente principal de energía que nuestro organismo utiliza para realizar sus actividades diarias (correr, trabajar, jugar, estudiar). Es preferible consumir cereales integrales por su valioso aporte de fibra."
+            },
+            leguminosas: {
+                title: "Leguminosas y Animal",
+                icon: "drumstick",
+                iconBg: "bg-red-100 text-red-600",
+                badge: "¡Combina y come Pocos!",
+                badgeColor: "bg-red-500",
+                description: "Proporcionan principalmente proteínas necesarias para el crecimiento, el desarrollo y para la formación y reparación de los tejidos corporales. Se recomienda limitar el consumo de carne roja."
+            }
+        };
+
+        const groups = document.querySelectorAll('.plate-group');
+        const svgElement = document.getElementById('plato-svg');
+        const modal = document.getElementById('info-modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModalBtn = document.getElementById('close-modal');
+
+        function openModal(sectionId) {
+            const data = nutritionData[sectionId];
+            if (!data) return;
+
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-desc').textContent = data.description;
+            
+            const iconContainer = document.getElementById('modal-icon');
+            iconContainer.innerHTML = `<i data-lucide="${data.icon}" class="w-8 h-8"></i>`;
+            iconContainer.className = `flex items-center justify-center w-16 h-16 rounded-2xl shadow-inner mb-2 ${data.iconBg}`;
+            lucide.createIcons();
+
+            const badge = document.getElementById('modal-badge');
+            badge.textContent = data.badge;
+            badge.className = `inline-block px-4 py-1.5 mt-3 text-xs uppercase tracking-wider font-bold text-white rounded-full shadow-sm ${data.badgeColor}`;
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-90', 'translate-y-4');
+            modalContent.classList.add('scale-100', 'translate-y-0');
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-100', 'translate-y-0');
+            modalContent.classList.add('scale-90', 'translate-y-4');
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        groups.forEach(group => {
+            const sectionId = group.getAttribute('data-section');
+
+            const activarSeccion = () => {
+                groups.forEach(g => g.classList.remove('active'));
+                group.classList.add('active');
+                
+                if (group.parentNode.lastElementChild !== group) {
+                    group.parentNode.appendChild(group);
+                }
+            };
+
+            group.addEventListener('mouseenter', activarSeccion);
+
+            group.addEventListener('click', () => {
+                openModal(sectionId);
+            });
+            
+            group.addEventListener('touchstart', () => {
+                activarSeccion();
+            }, { passive: true });
+        });
+
+        svgElement.addEventListener('mouseleave', () => {
+            groups.forEach(g => g.classList.remove('active'));
+        });
+
+        // ==========================================
+        // LÓGICA PARA EL MODAL DEL EVENTO 
+        // ==========================================
+        const modalEvento = document.getElementById('evento-modal');
+        const modalEventoContent = document.getElementById('evento-modal-content');
+        const btnEvento = document.getElementById('btn-evento');
+        const closeEventoBtn = document.getElementById('close-evento-modal');
+
+        function openEventoModal() {
+            modalEvento.classList.remove('opacity-0', 'pointer-events-none');
+            modalEventoContent.classList.remove('scale-90', 'translate-y-4');
+            modalEventoContent.classList.add('scale-100', 'translate-y-0');
+        }
+
+        function closeEventoModal() {
+            modalEvento.classList.add('opacity-0', 'pointer-events-none');
+            modalEventoContent.classList.remove('scale-100', 'translate-y-0');
+            modalEventoContent.classList.add('scale-90', 'translate-y-4');
+        }
+
+        btnEvento.addEventListener('click', (e) => {
+            e.preventDefault(); // Evita que la página salte al inicio
+            openEventoModal();
+        });
+
+        closeEventoBtn.addEventListener('click', closeEventoModal);
+        
+        // Cerrar si se hace clic fuera del contenido de la tarjeta blanca
+        modalEvento.addEventListener('click', (e) => {
+            if (e.target === modalEvento) closeEventoModal();
+        });
+
+    </script>
 </body>
 </html>
